@@ -5,7 +5,7 @@ class Source
   def initialize(name)
     @name = name
     @items = []
-    @id = Random.rand(1..50_000)
+    @id = Random.rand(1..500_000)
   end
 
   def add_source(item)
