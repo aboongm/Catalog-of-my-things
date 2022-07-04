@@ -9,10 +9,10 @@ class Item
   end
 
   def can_be_archived?
-    puts 'to be implemented'
+    false unless Date.today.year - Date.parse(@publish_date).year > 10
   end
 
   def move_to_archive
-    puts 'to be implemented'
+    @archived = true if can_be_archived?
   end
 end
