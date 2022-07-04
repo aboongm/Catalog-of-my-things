@@ -12,4 +12,3 @@ class MusicAlbum < Item
     @on_spotify && Date.today.year - Date.parse(@publish_date).year > 10
   end
 end
-
