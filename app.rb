@@ -82,14 +82,13 @@ class App
     else
       genre = Genre.new(name)
       puts 'genre created successfully'
-      return genre
+      genre
     end
   end
 
   def add_genre(genre)
     @genres << genre.name unless @genres.include?(genre.name)
   end
-
 
   def add_music_album(record)
     @music_albums << record

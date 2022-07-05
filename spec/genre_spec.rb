@@ -23,7 +23,7 @@ describe Genre do
     context 'test app methods for genre' do
       it 'add a new genre to list' do
         @app.add_genre(@jazz)
-        expect(@app.genres).to include("jazz")
+        expect(@app.genres).to include('jazz')
       end
     end
   end
