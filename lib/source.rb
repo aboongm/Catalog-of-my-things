@@ -7,8 +7,8 @@ class Source
     @id = Random.rand(1..1000)
   end
 
-  def add_source(item)
-    @item << item
-    item.source = self
+  def add_item(item)
+    item.add_source = self
+    @items << item unless @items.include?(item)
   end
 end
