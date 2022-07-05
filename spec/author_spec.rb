@@ -15,9 +15,11 @@ describe Author do
     it 'should test weather author object is instance of Author class' do
       expect(author).to be_a Author
 
-      # it 'should add author item object to Author items array' do
-      # author.add_item(game)
-      # expect(author.items[0]).to eq game
+      it 'should add author item object to Author items array' do
+       author.add_item(game)
+      expect(author.items[0]).to be_instance_of Game
+
+      end
     end
   end
 end

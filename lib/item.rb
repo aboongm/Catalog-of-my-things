@@ -5,8 +5,8 @@ class Item
   attr_reader :genre, :author, :source, :label
 
   def initialize(publish_date, archived: false)
-    @id = SecureRandom.uuid
-    @publish_date = Date.parse(publish_date)
+    @id = Random.rand(1..5000)
+    @publish_date = publish_date
     @archived = archived
   end
 
