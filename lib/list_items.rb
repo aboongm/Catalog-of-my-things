@@ -1,7 +1,8 @@
 class ListItems
   def show_books_list(books)
+    puts "books: #{books}"
     puts "\nList of Books: "
-    puts 'There is no book in the list. Please add a book!' if books.length.zero?
+    # puts 'There is no book in the list. Please add a book!' if books.length.zero?
     books.each_with_index do |book, index|
       puts "#{index + 1}. \t#{book.title} was published in the year #{book.publish_date}
       \tby the publisher #{book.publisher}"

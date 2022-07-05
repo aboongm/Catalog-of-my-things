@@ -1,4 +1,3 @@
-
 module SaveBookData
   def save_data(books)
     save_books(books)
@@ -14,8 +13,7 @@ module SaveBookData
         publish_date: book.publish_date
       }
     end
-   
+
     File.write('./data/books.json', JSON.generate(saved_books))
   end
-
 end
