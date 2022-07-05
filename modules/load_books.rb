@@ -11,4 +11,17 @@ module LoadBookData
       File.write('./data/books.json', [])
     end
   end
+
+  def load_labels
+    if File.exist?('./data/labels.json')
+      saved_labels = JSON.parse(File.read('./data/labels.json'))
+      labels = []
+      saved_labels.each do |label|
+        labels << Label.new(label['title'], label['color'])
+      end
+      labels
+    else
+      File.write('./data/labels.json', [])
+    end
+  end
 end
