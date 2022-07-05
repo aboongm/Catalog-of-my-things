@@ -9,7 +9,7 @@ class Genre
   end
 
   def add_item(item)
-    @item << item
-    item.genre = self
+    @items << item
+    item.add_genre(self)
   end
 end

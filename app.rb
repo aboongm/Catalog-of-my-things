@@ -1,7 +1,9 @@
 class App
-  attr_reader :music_albums
+  attr_reader :music_albums, :genres
+
   def initialize
     @music_albums = []
+    @genres = []
   end
 
   def options
@@ -62,7 +64,7 @@ class App
   # rubocop:enable Metrics
 
   def create_music_album
-    puts 'when was the album published [yyyy-mm-dd]: '
+    puts 'when was the album published? [yyyy-mm-dd]: '
     date_published = gets.chomp
     puts 'is album on spotify? [Y/N]: '
     ans = gets.chomp.downcase
@@ -71,6 +73,23 @@ class App
     puts 'Music album created!'
     @music_album
   end
+
+  def create_genre
+    puts "Please type name of genre\n"
+    name = gets.chomp
+    if @genres.include?(name)
+      puts "#{name} exists already"
+    else
+      genre = Genre.new(name)
+      puts 'genre created successfully'
+      return genre
+    end
+  end
+
+  def add_genre(genre)
+    @genres << genre.name unless @genres.include?(genre.name)
+  end
+
 
   def add_music_album(record)
     @music_albums << record
