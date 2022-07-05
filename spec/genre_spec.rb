@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Genre do
   before(:all) do
     @jazz = Genre.new('jazz')
-    @album = MusicAlbum.new('2000-12-06',false)
+    @album = MusicAlbum.new('2000-12-06', false)
     @jazz.add_item(@album)
     @app = App.new
   end
