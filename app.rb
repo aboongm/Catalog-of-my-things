@@ -1,4 +1,5 @@
 class App
+  attr_reader :music_albums
   def initialize
     @music_albums = []
   end
@@ -60,5 +61,30 @@ class App
   end
   # rubocop:enable Metrics
 
-  
+  def create_music_album
+    puts 'when was the album published [yyyy-mm-dd]: '
+    date_published = gets.chomp
+    puts 'is album on spotify? [Y/N]: '
+    ans = gets.chomp.downcase
+    on_spotify = input_to_boolean(ans)
+    @music_album = MusicAlbum.new(date_published, on_spotify: on_spotify)
+    puts 'Music album created!'
+    @music_album
+  end
+
+  def add_music_album(record)
+    @music_albums << record
+  end
+
+  def input_to_boolean(input)
+    case input
+    when 'y'
+      true
+    when 'n'
+      false
+    else
+      puts 'invalid response'
+      input_to_boolean(input)
+    end
+  end
 end
