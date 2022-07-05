@@ -14,10 +14,10 @@ describe Game do
       expect(game.multiplayer).to eq '22'
     end
 
-   it 'should detect the Game last_played_at' do
-     expect(game.last_played_at).to eq '2022-06-01'
-   end
-   
+    it 'should detect the Game last_played_at' do
+      expect(game.last_played_at).to eq '2022-06-01'
+    end
+
     it 'should detect the Game publish_date' do
       expect(game.publish_date).to eq '1960-05-12'
     end

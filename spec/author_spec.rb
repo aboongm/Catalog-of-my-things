@@ -16,9 +16,8 @@ describe Author do
       expect(author).to be_a Author
 
       it 'should add author item object to Author items array' do
-       author.add_item(game)
-      expect(author.items[0]).to be_instance_of Game
-
+        author.add_item(game)
+        expect(author.items[0]).to be_instance_of Game
       end
     end
   end
