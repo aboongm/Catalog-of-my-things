@@ -3,7 +3,7 @@ require_relative '../lib/movie'
 describe Movie do
   before(:each) do
     # @movie = Movie.new(publish_date: '2020-10-10', silent: false, archived: false, name: 'Test')
-    @movie =Movie.new(name: 'test', publish_date: '2022-10-10', silent: false, archived: false)
+    @movie = Movie.new(name: 'test', publish_date: '2022-10-10', silent: false, archived: false)
   end
 
   it 'shows instance of Movie class' do
