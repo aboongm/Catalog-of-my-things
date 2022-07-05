@@ -7,11 +7,11 @@ class Author
     @id = SecureRandom.uuid
     @first_name = first_name
     @last_name = last_name
-    @item = []
+    @items = []
   end
 
   def add_item(item)
-    @item << item
+    @items << item
     item.author = self
   end
 end
