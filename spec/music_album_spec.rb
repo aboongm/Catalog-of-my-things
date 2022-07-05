@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MusicAlbum do
   before(:all) do
     @app = App.new
-    @music = MusicAlbum.new('2015-06-23', archived: false, on_spotify: true)
+    @music = MusicAlbum.new('2015-06-23', false, on_spotify: true)
     @pop = Genre.new('pop')
     @music.add_genre(@pop)
   end
