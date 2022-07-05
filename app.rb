@@ -1,4 +1,8 @@
 class App
+  def initialize
+    @music_albums = []
+  end
+
   def options
     puts '
     Please choose an option by entering a number:
@@ -55,4 +59,6 @@ class App
     end
   end
   # rubocop:enable Metrics
+
+  
 end
