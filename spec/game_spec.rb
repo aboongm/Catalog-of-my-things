@@ -1,5 +1,5 @@
 require 'date'
-require_relative '../classes/game'
+require_relative '../lib/game'
 
 describe Game do
   game = Game.new('22', '2022-06-01', '1960-05-12')

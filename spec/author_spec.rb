@@ -1,6 +1,6 @@
 require 'date'
-require_relative '../classes/author'
-require_relative '../classes/game'
+require_relative '../lib/author'
+require_relative '../lib/game'
 
 describe Author do
   author = Author.new('William', 'Shakespear')
