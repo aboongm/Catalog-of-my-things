@@ -2,21 +2,22 @@ require 'json'
 require_relative './lib/list_items'
 require_relative './lib/create_book'
 require_relative './modules/save_books'
-
+require_relative './modules/load_books'
 
 class App
   attr_accessor :books, :labels
 
   include SaveBookData
+  include LoadBookData
   def initialize
-    @books = []
+    @books = load_books
     @labels = []
     @list_items = ListItems.new
   end
-  
+
   def start
     loop do
-    puts '
+      puts '
     Please choose an option by entering a number:
      1 - List all books
      2 - List all music albums
@@ -31,14 +32,14 @@ class App
      11 - Add a movie
      12 - Add a game
      13 - Exit'
-    puts ' Please select an option from the list above: '
-    input = gets.chomp
+      puts ' Please select an option from the list above: '
+      input = gets.chomp
       options(input)
     end
   end
 
   # rubocop:disable Metrics
-  def options(input)   
+  def options(input)
     case input
     when '1'
       @list_items.show_books_list(@books)
