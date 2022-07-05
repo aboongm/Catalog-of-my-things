@@ -3,6 +3,7 @@ require_relative './lib/list_items'
 require_relative './lib/create_book'
 require_relative './modules/save_books'
 require_relative './modules/load_books'
+require_relative './lib/label'
 
 class App
   attr_accessor :books, :labels
@@ -11,7 +12,7 @@ class App
   include LoadBookData
   def initialize
     @books = load_books
-    @labels = []
+    @labels = load_labels
     @list_items = ListItems.new
   end
 
