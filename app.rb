@@ -1,5 +1,17 @@
+require_relative './lib/list_items'
+require_relative './lib/create_book'
+
 class App
-  def options
+
+  attr_accessor :books, :labels
+  def initialize
+    @books = []
+    @labels = []
+    @list_items = ListItems.new
+  end
+
+  def start
+    loop do
     puts '
     Please choose an option by entering a number:
      1 - List all books
@@ -16,16 +28,16 @@ class App
      12 - Add a game
      13 - Exit'
     puts ' Please select an option from the list above: '
+    input = gets.chomp
+      options(input)
+    end
   end
 
   # rubocop:disable Metrics
-  def start
-    options
-    print 'Enter Option: '
-    input = gets.chomp
+  def options(input)   
     case input
     when '1'
-      puts 'list of books'
+      @list_items.show_books_list(@books)
     when '2'
       puts 'list all music albums'
     when '3'
@@ -39,9 +51,9 @@ class App
     when '7'
       puts 'List all sources'
     when '8'
-      puts 'List all labels'
+      @list_items.show_labels_list(@labels)
     when '9'
-      puts 'Add a book'
+      @books << CreateBook.new.create_book
     when '10'
       puts 'Add a music album'
     when '11'
@@ -50,6 +62,7 @@ class App
       puts 'Add a game'
     when '13'
       puts 'Bye....'
+      exit
     else
       puts 'Invalid option'
     end
