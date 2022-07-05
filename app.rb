@@ -1,15 +1,19 @@
+require 'json'
 require_relative './lib/list_items'
 require_relative './lib/create_book'
+require_relative './modules/save_books'
+
 
 class App
-
   attr_accessor :books, :labels
+
+  include SaveBookData
   def initialize
     @books = []
     @labels = []
     @list_items = ListItems.new
   end
-
+  
   def start
     loop do
     puts '
@@ -61,7 +65,8 @@ class App
     when '12'
       puts 'Add a game'
     when '13'
-      puts 'Bye....'
+      save_data(@books)
+      puts 'Thank you for using The App, Bye...'
       exit
     else
       puts 'Invalid option'
