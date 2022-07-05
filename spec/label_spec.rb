@@ -13,9 +13,9 @@ describe Label do
     end
 
     it "should add an item to the label's items array" do
-        book = Book.new('The Hobbit', 'George Allen & Unwin (UK)', 'good', '1937')
-        label.add_item(book)
-        expect(label.items).to include(book)
-        end
+      book = Book.new('The Hobbit', 'George Allen & Unwin (UK)', 'good', '1937')
+      label.add_item(book)
+      expect(label.items).to include(book)
+    end
   end
 end
