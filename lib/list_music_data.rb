@@ -1,8 +1,9 @@
 def list_music_albums
-  @music_albums.each { |a| puts "id: #{a.id}, genre: #{a.genre.name}, date-published: #{a.publish_date}" }
+  @music_albums.each_with_index { |a,i| puts "\t#{i+1}.   id: #{a.id}, genre: #{a.genre.name}, date-published: #{a.publish_date}" }
 end
 
 def list_genres
+  print "\tList of genre: "
   @genres.each do |g|
     if g == @genres[@genres.length - 1]
       puts g.name.to_s
