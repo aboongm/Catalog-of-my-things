@@ -4,16 +4,25 @@ require_relative './lib/create_book'
 require_relative './modules/save_books'
 require_relative './modules/load_books'
 require_relative './lib/label'
+require_relative './lib/create_movie'
+require_relative './modules/save_movies'
+require_relative './modules/load_movies'
+require_relative './lib/list_movies'
 
 class App
   attr_accessor :books, :labels
+  attr_accessor :movies 
 
   include SaveBookData
   include LoadBookData
+  include SaveMoviesData
+  include LoadMovieData
   def initialize
     @books = load_books
     @labels = load_labels
+    @movies = []
     @list_items = ListItems.new
+    @list_movies = ListMovies.new
   end
 
   def start
@@ -47,7 +56,7 @@ class App
     when '2'
       puts 'list all music albums'
     when '3'
-      puts 'List all movies'
+      @list_movies.show_movie_list(@movies)
     when '4'
       puts 'List all games'
     when '5'
@@ -63,11 +72,12 @@ class App
     when '10'
       puts 'Add a music album'
     when '11'
-      puts 'Add a movie'
+      @movies << CreateMovie.new.create_movie
     when '12'
       puts 'Add a game'
     when '13'
       save_data(@books)
+      save_movie(@movies)
       puts 'Thank you for using The App, Bye...'
       exit
     else
