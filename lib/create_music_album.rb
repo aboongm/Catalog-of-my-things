@@ -8,13 +8,13 @@ def create_music_album
   genre_name = gets.chomp
   @music_album = MusicAlbum.new(date_published, false, on_spotify: on_spotify)
   @music_album.add_genre(Genre.new(genre_name))
-  add_genre(Genre.new(genre_name))
+  add_genre(@genres,Genre.new(genre_name))
   puts 'Music album created!'
   @music_album
 end
 
-def add_music_album(record)
-  @music_albums << record
+def add_music_album(music_albums, record)
+  music_albums << record
 end
 
 def input_to_boolean(input)
@@ -30,9 +30,9 @@ def input_to_boolean(input)
   end
 end
 
-def add_genre(genre)
+def add_genre(genres, genre)
   return if @genre_names.include?(genre.name)
 
-  @genres << genre
+  genres << genre
   @genre_names << genre.name
 end

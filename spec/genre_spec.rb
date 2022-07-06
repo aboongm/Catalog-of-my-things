@@ -21,9 +21,14 @@ describe Genre do
     end
 
     context 'test app methods for genre' do
+        before(:all) do
+            @genres=[]
+            @genre_names=[]
+        end
+        
       it 'add a new genre to list' do
-        @app.add_genre(@jazz)
-        expect(@app.genres).to include('jazz')
+        add_genre(@genres,@jazz)
+        expect(@genres).to include(@jazz)
       end
     end
   end

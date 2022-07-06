@@ -1,4 +1,6 @@
 require_relative '../lib/music_album'
 require_relative '../lib/genre'
 require_relative '../lib/item'
+require_relative '../lib/create_music_album'
+require_relative '../lib/list_music_data'
 require_relative '../app'

@@ -74,7 +74,7 @@ class App
     when '9'
       @books << CreateBook.new.create_book
     when '10'
-      add_music_album(create_music_album)
+      add_music_album(@music_albums, create_music_album)
     when '11'
       puts 'Add a movie'
     when '12'
