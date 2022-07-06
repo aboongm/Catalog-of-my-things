@@ -8,6 +8,8 @@ require_relative './modules/load_music_album'
 require_relative './lib/label'
 require_relative './lib/music_album'
 require_relative './lib/genre'
+require_relative './lib/create_music_album'
+require_relative './lib/list_music_data'
 
 class App
   attr_accessor :books, :labels
@@ -79,9 +81,7 @@ class App
       puts 'Add a game'
     when '13'
       save_data(@books)
-      save_music_albums(@music_albums)
-      save_music_genres(@genres)
-      save_genre_names(@genre_names)
+      save_music_data(@music_albums, @genres, @genre_names)
       puts 'Thank you for using The App, Bye...'
       exit
     else
@@ -90,65 +90,4 @@ class App
   end
 
   # rubocop:enable Metrics
-
-  def create_music_album
-    print 'when was the album published? [yyyy-mm-dd]: '
-    date_published = gets.chomp
-    puts 'is album on spotify? [Y/N]: '
-    ans = gets.chomp.downcase
-    on_spotify = input_to_boolean(ans)
-    puts 'what genre does this album fall under?'
-    genre_name = gets.chomp
-    @music_album = MusicAlbum.new(date_published, false, on_spotify: on_spotify)
-    @music_album.add_genre(Genre.new(genre_name))
-    add_genre(Genre.new(genre_name))
-    puts 'Music album created!'
-    @music_album
-  end
-
-  def list_music_albums
-    @music_albums.each { |a| puts "id: #{a.id}, genre: #{a.genre.name}, date-published: #{a.publish_date}" }
-  end
-
-  def list_genres
-    @genres.each do |g|
-      if g == @genres[@genres.length - 1]
-        puts g.name.to_s
-      else
-        print "#{g.name}, "
-      end
-    end
-  end
-
-  def create_genre
-    puts "Please type name of genre\n"
-    name = gets.chomp
-    genre = Genre.new(name)
-    puts 'genre created successfully'
-    genre
-  end
-
-  def add_genre(genre)
-    return if @genre_names.include?(genre.name)
-
-    @genres << genre
-    @genre_names << genre.name
-  end
-
-  def add_music_album(record)
-    @music_albums << record
-  end
-
-  def input_to_boolean(input)
-    case input
-    when 'y'
-      true
-    when 'n'
-      false
-    else
-      puts 'invalid response'
-      print 'is album on spotify? [Y/N]: '
-      input_to_boolean(gets.chomp)
-    end
-  end
 end

@@ -1,5 +1,11 @@
 require 'json'
 module SaveMusicData
+  def save_music_data(albums, genres, genre_names)
+    save_music_albums(albums)
+    save_music_genres(genres)
+    save_genre_names(genre_names)
+  end
+
   def save_music_albums(albums)
     data = []
     albums.each do |album|
