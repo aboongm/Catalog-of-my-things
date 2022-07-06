@@ -1,181 +1,141 @@
 require 'json'
-
 require_relative './lib/list_items'
-
 require_relative './lib/create_book'
-
 require_relative './modules/save_books'
-
 require_relative './modules/load_books'
-
 require_relative './lib/label'
 
 class App
   attr_accessor :books, :labels
-
   attr_reader :music_albums, :genres
 
   include SaveBookData
-
   include LoadBookData
 
   def initialize
     @books = load_books
-
     @labels = load_labels
-
     @list_items = ListItems.new
-
     @music_albums = []
-
     @genres = []
   end
 
   def start
     loop do
-      puts '
-
-    Please choose an option by entering a number:
-
-     1 - List all books
-
-     2 - List all music albums
-
-     3 - List all movies
-
-     4 - List all games
-
-     5 - List all genres
-
-     6 - List all authors
-
-     7 - List all sources
-
-     8 - List all labels
-
-     9 - Add a book
-
-     10 - Add a music album
-
-     11 - Add a movie
-
-     12 - Add a game
-
-     13 - Exit'
-
-      puts ' Please select an option from the list above: '
-
+      puts "
+      \tPlease Choose An Option [1-5]:
+      \t1 - Books
+      \t2 - Music Albums
+      \t3 - Movies
+      \t4 - Games
+      \t5 - Exit"
+      puts "\tPlease select an option from the list above: "
       input = gets.chomp
-
       options(input)
     end
   end
-
   # rubocop:disable Metrics
 
   def options(input)
     case input
-
     when '1'
-
-      @list_items.show_books_list(@books)
-
+      puts "
+    \tPlease Choose An Option [1-3]:
+      \t1. List Books
+      \t2. List Labels
+      \t3. Add Book"
+      book_option = gets.chomp
+      case book_option
+      when '1'
+        @list_items.show_books_list(@books)
+      when '2'
+        @list_items.show_labels_list(@labels)
+      when '3'
+        CreateBook.new.create_book(@books, @labels)
+      else
+        puts "\tInvalid Option!"
+      end
     when '2'
-
-      puts 'list all music albums'
-
+      puts "
+    \tPlease Choose An Option [1-3]:
+      \t1. List Music Albums
+      \t2. List Genres
+      \t3. Add Music Album"
+      music_option = gets.chomp
+      case music_option
+      when '1'
+        puts 'list Music Albums'
+      when '2'
+        puts 'list Genres'
+      when '3'
+        puts 'Add music album'
+      else
+        puts "\tInvalid Option!"
+      end
     when '3'
-
-      puts 'List all movies'
-
+      puts "
+    \tPlease Choose An Option [1-3]:
+      \t1. List Games
+      \t2. List Authors
+      \t3. Add Game"
+      game_option = gets.chomp
+      case game_option
+      when '1'
+        puts 'list Games'
+      when '2'
+        puts 'list Authors'
+      when '3'
+        puts 'Add Games'
+      else
+        puts "\tInvalid Option!"
+      end
     when '4'
-
-      puts 'List all games'
-
+      puts "
+    \tPlease Choose An Option [1-3]:
+      \t1. List Movies
+      \t2. List Sources
+      \t3. Add Movie"
+      movie_option = gets.chomp
+      case movie_option
+      when '1'
+        puts 'list Movies'
+      when '2'
+        puts 'list Sources'
+      when '3'
+        puts 'Add Movie'
+      else
+        puts "\tInvalid Option!"
+      end
     when '5'
-
-      puts 'List all genres'
-
-    when '6'
-
-      puts 'List all authors'
-
-    when '7'
-
-      puts 'List all sources'
-
-    when '8'
-
-      @list_items.show_labels_list(@labels)
-
-    when '9'
-
-      @books << CreateBook.new.create_book
-
-    when '10'
-
-      puts 'Add a music album'
-
-    when '11'
-
-      puts 'Add a movie'
-
-    when '12'
-
-      puts 'Add a game'
-
-    when '13'
-
-      save_data(@books)
-
-      puts 'Thank you for using The App, Bye...'
-
+      save_data(@books, @labels)
+      puts "\tThank you for using The App, Bye..."
       exit
-
     else
-
-      puts 'Invalid option'
-
+      puts "\tInvalid option"
     end
   end
-
   # rubocop:enable Metrics
 
   def create_music_album
     puts 'when was the album published? [yyyy-mm-dd]: '
-
     date_published = gets.chomp
-
     puts 'is album on spotify? [Y/N]: '
-
     ans = gets.chomp.downcase
-
     on_spotify = input_to_boolean(ans)
-
     @music_album = MusicAlbum.new(date_published, on_spotify: on_spotify)
-
     puts 'Music album created!'
-
     @music_album
   end
 
   def create_genre
     puts "Please type name of genre\n"
-
     name = gets.chomp
-
     if @genres.include?(name)
-
       puts "#{name} exists already"
-
     else
-
       genre = Genre.new(name)
-
       puts 'genre created successfully'
-
       genre
-
     end
   end
 
@@ -189,21 +149,13 @@ class App
 
   def input_to_boolean(input)
     case input
-
     when 'y'
-
       true
-
     when 'n'
-
       false
-
     else
-
       puts 'invalid response'
-
       input_to_boolean(input)
-
     end
   end
 end
