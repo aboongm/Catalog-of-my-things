@@ -1,6 +1,7 @@
 module SaveBookData
-  def save_data(books)
+  def save_data(books, labels)
     save_books(books)
+    save_labels(labels)
   end
 
   def save_books(books)
@@ -13,7 +14,17 @@ module SaveBookData
         publish_date: book.publish_date
       }
     end
-
     File.write('./data/books.json', JSON.generate(saved_books))
+  end
+
+  def save_labels(labels)
+    saved_labels = []
+    labels.each do |label|
+      saved_labels << {
+        title: label.title,
+        color: label.color
+      }
+    end
+    File.write('./data/labels.json', JSON.generate(saved_labels))
   end
 end
