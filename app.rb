@@ -3,7 +3,13 @@ require_relative './lib/list_items'
 require_relative './lib/create_book'
 require_relative './modules/save_books'
 require_relative './modules/load_books'
+require_relative './modules/save_music_album'
+require_relative './modules/load_music_album'
 require_relative './lib/label'
+require_relative './lib/music_album'
+require_relative './lib/genre'
+require_relative './lib/create_music_album'
+require_relative './lib/list_music_data'
 
 class App
   attr_accessor :books, :labels
@@ -11,13 +17,16 @@ class App
 
   include SaveBookData
   include LoadBookData
+  include LoadMusicData
+  include SaveMusicData
 
   def initialize
     @books = load_books
     @labels = load_labels
     @list_items = ListItems.new
-    @music_albums = []
-    @genres = []
+    @music_albums = load_music_albums
+    @genre_names = load_genres_names
+    @genres = load_music_genres
   end
 
   def start
@@ -64,11 +73,11 @@ class App
       music_option = gets.chomp
       case music_option
       when '1'
-        puts 'list Music Albums'
+        list_music_albums
       when '2'
-        puts 'list Genres'
+        list_genres
       when '3'
-        puts 'Add music album'
+        add_music_album(@music_albums, create_music_album)
       else
         puts "\tInvalid Option!"
       end
@@ -108,6 +117,7 @@ class App
       end
     when '5'
       save_data(@books, @labels)
+      save_music_data(@music_albums, @genres, @genre_names)
       puts "\tThank you for using The App, Bye..."
       exit
     else
@@ -115,47 +125,4 @@ class App
     end
   end
   # rubocop:enable Metrics
-
-  def create_music_album
-    puts 'when was the album published? [yyyy-mm-dd]: '
-    date_published = gets.chomp
-    puts 'is album on spotify? [Y/N]: '
-    ans = gets.chomp.downcase
-    on_spotify = input_to_boolean(ans)
-    @music_album = MusicAlbum.new(date_published, on_spotify: on_spotify)
-    puts 'Music album created!'
-    @music_album
-  end
-
-  def create_genre
-    puts "Please type name of genre\n"
-    name = gets.chomp
-    if @genres.include?(name)
-      puts "#{name} exists already"
-    else
-      genre = Genre.new(name)
-      puts 'genre created successfully'
-      genre
-    end
-  end
-
-  def add_genre(genre)
-    @genres << genre.name unless @genres.include?(genre.name)
-  end
-
-  def add_music_album(record)
-    @music_albums << record
-  end
-
-  def input_to_boolean(input)
-    case input
-    when 'y'
-      true
-    when 'n'
-      false
-    else
-      puts 'invalid response'
-      input_to_boolean(input)
-    end
-  end
 end
