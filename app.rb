@@ -63,7 +63,7 @@ class App
     when '8'
       @list_items.show_labels_list(@labels)
     when '9'
-      CreateBook.new.create_book(@books, @labels)      
+      CreateBook.new.create_book(@books, @labels)
     when '10'
       puts 'Add a music album'
     when '11'
