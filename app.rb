@@ -106,6 +106,7 @@ class App
       movie_option = gets.chomp
       case movie_option
       when '1'
+
         @list_movies.show_movie_list(@movies)
       when '2'
         puts 'list Sources'
@@ -168,3 +169,7 @@ class App
     end
   end
 end
+<<<<<<< HEAD
+=======
+end
+>>>>>>> 802a1299d3f43325a0844b17649e8c28124dbacf
