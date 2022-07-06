@@ -10,9 +10,8 @@ require_relative './modules/load_movies'
 require_relative './lib/list_movies'
 
 class App
-  attr_accessor :books, :labels
+  attr_accessor :books, :labels, :movies
   attr_reader :music_albums, :genres
-  attr_accessor :movies
 
   include SaveBookData
   include LoadBookData
@@ -107,6 +106,7 @@ class App
       movie_option = gets.chomp
       case movie_option
       when '1'
+
         @list_movies.show_movie_list(@movies)
       when '2'
         puts 'list Sources'
@@ -168,4 +168,5 @@ class App
       input_to_boolean(input)
     end
   end
+end
 end
