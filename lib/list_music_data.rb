@@ -1,5 +1,7 @@
 def list_music_albums
-  @music_albums.each_with_index { |a,i| puts "\t#{i+1}.   id: #{a.id}, genre: #{a.genre.name}, date-published: #{a.publish_date}" }
+  @music_albums.each_with_index do |a, i|
+    puts "\t#{i + 1}.   id: #{a.id}, genre: #{a.genre.name}, date-published: #{a.publish_date}"
+  end
 end
 
 def list_genres
