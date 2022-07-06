@@ -73,11 +73,11 @@ class App
       music_option = gets.chomp
       case music_option
       when '1'
-        puts 'list Music Albums'
+        list_music_albums
       when '2'
-        puts 'list Genres'
+        list_genres
       when '3'
-        puts 'Add music album'
+        add_music_album(@music_albums, create_music_album)
       else
         puts "\tInvalid Option!"
       end
@@ -117,6 +117,7 @@ class App
       end
     when '5'
       save_data(@books, @labels)
+      save_music_data(@music_albums, @genres, @genre_names)
       puts "\tThank you for using The App, Bye..."
       exit
     else
