@@ -12,7 +12,7 @@ class ListMovies
     puts "\nList of Sources: "
     puts 'There is no sources in the list. Please add a source!' if sources.length.zero?
     sources.each_with_index do |source, index|
-      puts "#{index + 1}. Name: #{source.name}"
+      puts "#{index + 1}. Source Name: #{source.source}"
     end
     puts "\n"
   end

@@ -17,7 +17,7 @@ module LoadMovieData
       saved_labels = JSON.parse(File.read('./data/source.json'))
       labels = []
       saved_labels.each do |source|
-        labels << Source.new(source['name'])
+        labels << Source.new(source['source'])
       end
       labels
     else
