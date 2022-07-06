@@ -10,9 +10,8 @@ require_relative './modules/load_movies'
 require_relative './lib/list_movies'
 
 class App
-  attr_accessor :books, :labels
+  attr_accessor :books, :labels, :movies
   attr_reader :music_albums, :genres
-  attr_accessor :movies
 
   include SaveBookData
   include LoadBookData
@@ -117,7 +116,7 @@ class App
       end
     when '5'
       save_data(@books, @labels)
-      save_movie(@movies)
+      save_movie_data(@movies)
       puts "\tThank you for using The App, Bye..."
       exit
     else
