@@ -8,7 +8,7 @@ def create_music_album
   genre_name = gets.chomp
   @music_album = MusicAlbum.new(date_published, false, on_spotify: on_spotify)
   @music_album.add_genre(Genre.new(genre_name))
-  add_genre(@genres,Genre.new(genre_name))
+  add_genre(@genres, Genre.new(genre_name))
   puts 'Music album created!'
   @music_album
 end
