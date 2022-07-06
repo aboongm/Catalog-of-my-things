@@ -169,7 +169,3 @@ class App
     end
   end
 end
-<<<<<<< HEAD
-=======
-end
->>>>>>> 802a1299d3f43325a0844b17649e8c28124dbacf
