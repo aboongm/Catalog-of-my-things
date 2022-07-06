@@ -1,6 +1,7 @@
 module SaveMoviesData
-  def save_movie_data(movies)
+  def save_movie_data(movies, source)
     save_movie(movies)
+    save_source(source)
   end
 
   def save_movie(movies)
@@ -13,7 +14,16 @@ module SaveMoviesData
         name: movie.name
       }
     end
-
     File.write('./data/movies.json', JSON.generate(saved_movies))
+  end
+
+  def save_source(sources)
+    saved_source = []
+    sources.each do |source|
+      saved_source << {
+        name: source.name
+      }
+    end
+    File.write('./data/source.json', JSON.generate(saved_source))
   end
 end

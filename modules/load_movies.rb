@@ -11,4 +11,17 @@ module LoadMovieData
       File.write('./data/movies.json', [])
     end
   end
+
+  def load_source
+    if File.exist?('./data/source.json')
+      saved_labels = JSON.parse(File.read('./data/source.json'))
+      labels = []
+      saved_labels.each do |source|
+        labels << Source.new(source['name'])
+      end
+      labels
+    else
+      File.write('./data/source.json', [])
+    end
+  end
 end

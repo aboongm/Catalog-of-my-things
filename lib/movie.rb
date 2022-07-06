@@ -1,11 +1,11 @@
 require_relative 'item'
-
 class Movie < Item
-  attr_accessor :silent
+  attr_accessor :silent, :name
 
   def initialize(publish_date:, silent:, archived: false, name: 'unknown')
-    super(publish_date: publish_date, archived: archived, name: name)
+    super(publish_date: publish_date, archived: archived)
     @silent = silent
+    @name = name
   end
 
   def can_be_archived?

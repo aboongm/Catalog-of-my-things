@@ -8,23 +8,24 @@ require_relative './lib/create_movie'
 require_relative './modules/save_movies'
 require_relative './modules/load_movies'
 require_relative './lib/list_movies'
+require_relative './lib/source'
 
 class App
-  attr_accessor :books, :labels, :movies
+  attr_accessor :books, :labels, :movies, :source
   attr_reader :music_albums, :genres
 
   include SaveBookData
   include LoadBookData
   include SaveMoviesData
   include LoadMovieData
-
   def initialize
     @books = load_books
     @labels = load_labels
     @list_items = ListItems.new
     @music_albums = []
     @genres = []
-    @movies = []
+    @movies = [] || load_movies
+    @source = [] || load_source
     @list_movies = ListMovies.new
   end
 
@@ -42,8 +43,8 @@ class App
       options(input)
     end
   end
-  # rubocop:disable Metrics
 
+  # rubocop:disable Metrics
   def options(input)
     case input
     when '1'
@@ -106,26 +107,25 @@ class App
       movie_option = gets.chomp
       case movie_option
       when '1'
-
         @list_movies.show_movie_list(@movies)
       when '2'
-        puts 'list Sources'
+        @list_movies.show_source_list(@source)
       when '3'
-        @movies << CreateMovie.new.create_movie
+        CreateMovie.new.create_movie(@movies, @source)
       else
         puts "\tInvalid Option!"
       end
     when '5'
       save_data(@books, @labels)
-      save_movie_data(@movies)
+      save_movie_data(@movies, @source)
       puts "\tThank you for using The App, Bye..."
       exit
     else
       puts "\tInvalid option"
     end
   end
-  # rubocop:enable Metrics
 
+  # rubocop:enable Metrics
   def create_music_album
     puts 'when was the album published? [yyyy-mm-dd]: '
     date_published = gets.chomp
