@@ -4,13 +4,23 @@ require_relative './lib/create_book'
 require_relative './modules/save_books'
 require_relative './modules/load_books'
 require_relative './lib/label'
+require_relative './modules/load_author'
+require_relative './modules/load_game'
+require_relative './lib/list_games'
+require_relative './modules/save_games'
+require_relative './modules/save_author'
+require_relative './lib/author'
 
 class App
-  attr_accessor :books, :labels
+  attr_accessor :books, :labels, :authors, :games
   attr_reader :music_albums, :genres
 
   include SaveBookData
   include LoadBookData
+  include GameModule
+  include SaveGameData
+  include SaveAuthorData
+  include AuthorModule
 
   def initialize
     @books = load_books
@@ -18,6 +28,9 @@ class App
     @list_items = ListItems.new
     @music_albums = []
     @genres = []
+    @games = fetch_games
+    @authors = fetch_authors
+    @list_games = ListGames.new
   end
 
   def start
@@ -26,8 +39,8 @@ class App
       \tPlease Choose An Option [1-5]:
       \t1 - Books
       \t2 - Music Albums
-      \t3 - Movies
-      \t4 - Games
+      \t3 - Games
+      \t4 - Movies
       \t5 - Exit"
       puts "\tPlease select an option from the list above: "
       input = gets.chomp
@@ -81,11 +94,11 @@ class App
       game_option = gets.chomp
       case game_option
       when '1'
-        puts 'list Games'
+        ListGames.new.list_games(@games)
       when '2'
-        puts 'list Authors'
+        ListAuthor.new.list_author(@authors)
       when '3'
-        puts 'Add Games'
+        create_game(@games)
       else
         puts "\tInvalid Option!"
       end
@@ -108,6 +121,8 @@ class App
       end
     when '5'
       save_data(@books, @labels)
+      save_author(@authors)
+      save_games(@games)
       puts "\tThank you for using The App, Bye..."
       exit
     else
