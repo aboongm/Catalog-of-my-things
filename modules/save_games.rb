@@ -1,9 +1,9 @@
 module SaveGameData
-  def save_games_data(games,authors)
+  def save_games_data(games, authors)
     save_games(games)
     save_author(authors)
   end
-  
+
   def save_games(games)
     saved_games = []
     games.each do |game|
