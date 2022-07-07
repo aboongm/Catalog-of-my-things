@@ -141,7 +141,7 @@ class App
       save_music_data(@music_albums, @genres, @genre_names)
       save_games_data(@games, @authors)
       save_movie_data(@movies, @sources)
-      puts "\tThank you for using The App, Bye..."
+      puts "\tThank you for using The App, Bye...."
       exit
     else
       puts "\tInvalid option"
