@@ -17,9 +17,8 @@ module GameModule
         saved_games = JSON.parse(File.read(game_db))
         saved_games.each { |game| games << Game.new(game['multiplayer'], game['last_played_at'], game['publish_date']) }
       end
-    else
-      games
     end
+    games
   end
 
   def create_game(games)
