@@ -30,3 +30,16 @@ CREATE TABLE IF NOT EXISTS genres(
   id SERIAL PRIMARY KEY,
   name VARCHAR
 )
+
+CREATE TABLE movies(
+  id INT,
+  silent BOOLEAN,
+  source_id SERIAL,
+  FOREIGN KEY(source_id) REFERENCES sources.id
+);
+
+CREATE TABLE sources(
+  id INT GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR(255)
+  PRIMARY KEY(id)
+);
