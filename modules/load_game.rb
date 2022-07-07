@@ -15,7 +15,7 @@ module GameModule
         games
       else
         saved_games = JSON.parse(File.read(game_db))
-        saved_games.each {|game| games << Game.new(game['multiplayer'], game['last_played_at'], game['publish_date'])}
+        saved_games.each { |game| games << Game.new(game['multiplayer'], game['last_played_at'], game['publish_date']) }
       end
     else
       games
@@ -39,7 +39,7 @@ module GameModule
     last_name = gets.chomp
 
     new_game = Game.new(multiplayer, last_played_at, publish_date)
-    new_author =Author.new(first_name, last_name)
+    new_author = Author.new(first_name, last_name)
     new_game.add_author(new_author)
     add_game(games, new_game)
     add_author(@authors, new_author)
@@ -51,5 +51,4 @@ module GameModule
   def add_author(authors, author)
     authors.push(author)
   end
-
 end
