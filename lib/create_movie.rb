@@ -18,4 +18,3 @@ class CreateMovie
     puts "The movie is created successfuly\n\n"
   end
 end
-

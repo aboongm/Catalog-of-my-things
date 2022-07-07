@@ -5,7 +5,6 @@ class ListMovies
     movies.each_with_index do |movie, index|
       puts "\t#{index + 1}. Name: #{movie.name}, Publish Date: #{movie.publish_date}
       Silent: #{movie.silent}, Archived: #{movie.archived}"
-     
     end
   end
 
