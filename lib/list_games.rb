@@ -5,8 +5,8 @@ class ListGames
     else
       puts "#{games.count} Games Found!"
       games.each do |game|
-        puts "Players: #{game['multiplayer']}" \
-             "-Last Played: #{game['last_played_at']} - Published: #{game['publish_date']}"
+        puts "Players: #{game.multiplayer}" \
+             "-Last Played: #{game.last_played_at} - Published: #{game.publish_date}"
       end
     end
   end

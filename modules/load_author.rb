@@ -12,8 +12,8 @@ module AuthorModule
         saved_authors = JSON.parse(File.read(author_db))
         saved_authors.each { |author| authors << Author.new(author['first_name'], author['last_name']) }
       end
-    else
-      authors
+
     end
+    authors
   end
 end
