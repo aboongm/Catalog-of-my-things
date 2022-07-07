@@ -29,11 +29,12 @@ describe MusicAlbum do
 
   context 'test app methods for music albums' do
     before(:all) do
-      @app.add_music_album(@music)
+      @music_albums = []
+      add_music_album(@music_albums, @music)
     end
 
     it 'add a music album to a list of albums' do
-      expect(@app.music_albums).to include(@music)
+      expect(@music_albums).to include(@music)
     end
   end
 end
