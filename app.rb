@@ -3,23 +3,28 @@ require_relative './lib/list_items'
 require_relative './lib/create_book'
 require_relative './modules/save_books'
 require_relative './modules/load_books'
-require_relative './modules/save_music_album'
-require_relative './modules/load_music_album'
 require_relative './lib/label'
 require_relative './lib/music_album'
 require_relative './lib/genre'
 require_relative './lib/create_music_album'
 require_relative './lib/list_music_data'
-
+require_relative './modules/save_music_album'
+require_relative './modules/load_music_album'
+require_relative './lib/create_movie'
+require_relative './modules/save_movies'
+require_relative './modules/load_movies'
+require_relative './lib/list_movies'
+require_relative './lib/source'
 class App
-  attr_accessor :books, :labels
+  attr_accessor :books, :labels, :movies, :source
   attr_reader :music_albums, :genres
 
   include SaveBookData
   include LoadBookData
   include LoadMusicData
   include SaveMusicData
-
+  include SaveMoviesData
+  include LoadMovieData
   def initialize
     @books = load_books
     @labels = load_labels
@@ -27,6 +32,10 @@ class App
     @music_albums = load_music_albums
     @genre_names = load_genres_names
     @genres = load_music_genres
+
+    @movies = load_movies
+    @sources = load_source
+    @list_movies = ListMovies.new
   end
 
   def start
@@ -35,16 +44,16 @@ class App
       \tPlease Choose An Option [1-5]:
       \t1 - Books
       \t2 - Music Albums
-      \t3 - Movies
-      \t4 - Games
+      \t3 - Games
+      \t4 - Movies
       \t5 - Exit"
       puts "\tPlease select an option from the list above: "
       input = gets.chomp
       options(input)
     end
   end
-  # rubocop:disable Metrics
 
+  # rubocop:disable Metrics
   def options(input)
     case input
     when '1'
@@ -107,17 +116,18 @@ class App
       movie_option = gets.chomp
       case movie_option
       when '1'
-        puts 'list Movies'
+        @list_movies.show_movie_list(@movies)
       when '2'
-        puts 'list Sources'
+        @list_movies.show_source_list(@sources)
       when '3'
-        puts 'Add Movie'
+        CreateMovie.new.create_movie(@movies, @sources)
       else
         puts "\tInvalid Option!"
       end
     when '5'
       save_data(@books, @labels)
       save_music_data(@music_albums, @genres, @genre_names)
+      save_movie_data(@movies, @sources)
       puts "\tThank you for using The App, Bye..."
       exit
     else
