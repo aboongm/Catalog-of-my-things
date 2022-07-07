@@ -16,3 +16,19 @@ CREATE TABLE IF NOT EXISTS books (
   label_id INTEGER,
   FOREIGN KEY (label_id) REFERENCES labels(id)
 );
+
+
+CREATE TABLE IF NOT EXISTS authors (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR(100) NOT NULL,
+  PRIMARY key (id)
+)
+
+CREATE TABLE IF NOT EXISTS games (
+  id INT,
+  games_id INT,
+  multiplayer BOOLEAN,
+  last_played_at DATE,
+  FOREIGN KEY (games_id) REFERENCES authors (id)
+);
