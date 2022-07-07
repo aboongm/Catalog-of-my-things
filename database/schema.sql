@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS genres(
   name VARCHAR
 );
 
+
 CREATE TABLE movies(
   id INT,
   silent BOOLEAN,
