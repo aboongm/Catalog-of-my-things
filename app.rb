@@ -18,6 +18,7 @@ require_relative './lib/source'
 class App
   attr_accessor :books, :labels, :movies, :source
   attr_reader :music_albums, :genres
+
   include SaveBookData
   include LoadBookData
   include LoadMusicData
@@ -31,11 +32,12 @@ class App
     @music_albums = load_music_albums
     @genre_names = load_genres_names
     @genres = load_music_genres
- 
+
     @movies = load_movies
     @sources = load_source
     @list_movies = ListMovies.new
   end
+
   def start
     loop do
       puts "
@@ -50,6 +52,7 @@ class App
       options(input)
     end
   end
+
   # rubocop:disable Metrics
   def options(input)
     case input

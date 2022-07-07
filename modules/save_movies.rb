@@ -19,9 +19,10 @@ module SaveMoviesData
 
   def save_source(sources)
     saved_source = []
-    sources.each do |source|
+    sources.each do |n_source|
+      puts "n_source: #{n_source}"
       saved_source << {
-        name: source.name
+        source: n_source.name
       }
     end
     File.write('./data/source.json', JSON.generate(saved_source))

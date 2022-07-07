@@ -4,7 +4,7 @@ module LoadMovieData
       saved_movies = JSON.parse(File.read('./data/movies.json'))
       movies = []
       saved_movies.each do |movie|
-        movies << Movie.new(movie['publish_date', movie['silent'], movie['archived', movie['name']]])
+        movies << Movie.new(movie['publish_date'], movie['silent'], movie['archived'], movie['name'])
       end
       movies
     else
@@ -14,12 +14,12 @@ module LoadMovieData
 
   def load_source
     if File.exist?('./data/source.json')
-      saved_labels = JSON.parse(File.read('./data/source.json'))
-      labels = []
-      saved_labels.each do |source|
-        labels << Source.new(source['source'])
+      saved_sources = JSON.parse(File.read('./data/source.json'))
+      sources = []
+      saved_sources.each do |source|
+        sources << Source.new(source['source'])
       end
-      labels
+      sources
     else
       File.write('./data/source.json', [])
     end
