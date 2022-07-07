@@ -4,16 +4,16 @@ require_relative './lib/create_book'
 require_relative './modules/save_books'
 require_relative './modules/load_books'
 require_relative './lib/label'
-require_relative './modules/load_author'
-require_relative './modules/load_game'
-require_relative './lib/list_games'
-require_relative './modules/save_games'
-require_relative './modules/save_author'
-require_relative './lib/author'
 require_relative './lib/music_album'
 require_relative './lib/genre'
 require_relative './lib/create_music_album'
 require_relative './lib/list_music_data'
+require_relative './modules/load_author'
+require_relative './modules/load_game'
+require_relative './lib/list_games'
+require_relative './lib/list_author'
+require_relative './modules/save_games'
+require_relative './lib/author'
 require_relative './modules/save_music_album'
 require_relative './modules/load_music_album'
 require_relative './lib/create_movie'
@@ -21,35 +21,35 @@ require_relative './modules/save_movies'
 require_relative './modules/load_movies'
 require_relative './lib/list_movies'
 require_relative './lib/source'
+
 class App
   attr_accessor :books, :labels, :movies, :source, :authors, :games
   attr_reader :music_albums, :genres
+
   include SaveBookData
   include LoadBookData
-  include GameModule
-  include SaveGameData
-  include SaveAuthorData
-  include AuthorModule
   include LoadMusicData
   include SaveMusicData
+  include GameModule
+  include SaveGameData
+  include AuthorModule
+
   include SaveMoviesData
   include LoadMovieData
-  
   def initialize
     @books = load_books
     @labels = load_labels
     @list_items = ListItems.new
-    
     @music_albums = load_music_albums
     @genre_names = load_genres_names
     @genres = load_music_genres
     @games = fetch_games
     @authors = fetch_authors
-    @list_games = ListGames.new
     @movies = load_movies
     @sources = load_source
     @list_movies = ListMovies.new
   end
+
   def start
     loop do
       puts "
@@ -64,6 +64,7 @@ class App
       options(input)
     end
   end
+
   # rubocop:disable Metrics
   def options(input)
     case input
@@ -112,7 +113,7 @@ class App
       when '1'
         ListGames.new.list_games(@games)
       when '2'
-        ListAuthor.new.list_author(@authors)
+        ListAuthor.new.list_authors(@authors)
       when '3'
         create_game(@games)
       else
@@ -138,8 +139,7 @@ class App
     when '5'
       save_data(@books, @labels)
       save_music_data(@music_albums, @genres, @genre_names)
-      save_author(@authors)
-      save_games(@games)
+      save_games_data(@games,@authors)
       save_movie_data(@movies, @sources)
       puts "\tThank you for using The App, Bye..."
       exit
@@ -149,9 +149,3 @@ class App
   end
   # rubocop:enable Metrics
 end
-
-
-
-
-
-
